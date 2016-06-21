@@ -1,0 +1,186 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 1em; }
+
+body {
+  font-family: 'Open Sans';
+  font-weight: 300;
+  background: #eee; }
+  body.overlay-active header, body.overlay-active main, body.overlay-active footer {
+    -webkit-filter: blur(3px); }
+  body.overlay-active #overlay {
+    display: block; }
+
+input:focus, button:focus {
+  outline: 0; }
+
+input, button {
+  border: 1px solid #333;
+  font-family: 'Open Sans';
+  border-radius: 3px; }
+
+h1 {
+  font-weight: 900;
+  font-size: 2em; }
+
+h2 {
+  font-weight: 700;
+  font-size: 1.5em; }
+
+h3 {
+  font-weight: 500;
+  font-size: 1.5em; }
+
+button, [type=submit] {
+  font-weight: bold;
+  margin: 0.5em;
+  padding: 0.25em 0.5em;
+  background: linear-gradient(to bottom, #eee, #ddd);
+  border: 0.1em solid black;
+  cursor: pointer; }
+
+header, main, footer {
+  margin: 0;
+  display: block; }
+
+header {
+  height: 3em;
+  padding: 1.5em 1em;
+  background: #0cf;
+  border-bottom: 0.1em solid #666; }
+  header h1 {
+    letter-spacing: 2px;
+    color: white; }
+  header #actions {
+    text-align: right;
+    margin-top: -2em; }
+    header #actions #user, header #actions #search {
+      display: inline-block; }
+    header #actions #search {
+      margin-right: 2em;
+      margin-bottom: 1em; }
+      header #actions #search input {
+        border-radius: 0px;
+        padding: 0.5em;
+        border: none;
+        border: 1px solid black; }
+
+main {
+  padding: 1em; }
+
+.new-event {
+  margin: 0 auto;
+  display: block; }
+
+form {
+  font-family: 'open sans';
+  padding: 0 1em 1em 1em; }
+  form label {
+    margin: 1em 0;
+    display: block; }
+    form label span:after {
+      content: ' (optional)';
+      color: gray; }
+    form label.required span:after {
+      position: relative;
+      font-size: 1em;
+      content: ' * ';
+      color: red; }
+    form label input, form label textarea {
+      display: block;
+      padding: 0.5em; }
+      form label input[data-validated=false], form label textarea[data-validated=false] {
+        border-color: #ff3232; }
+      form label input[data-validated=true], form label textarea[data-validated=true] {
+        border-color: #32ff32; }
+    form label input {
+      width: 230px; }
+
+form#create-edit-event-form label {
+  display: inline-block;
+  margin: 0.75em; }
+
+#create-event-dialog form label {
+  display: inline-block;
+  margin: 1em; }
+
+#create-edit-event-delete {
+  color: red;
+  float: right;
+  margin-top: -2em; }
+
+#error-dialog {
+  padding: 2em;
+  text-align: center; }
+  #error-dialog #error {
+    margin: 2em auto;
+    color: red; }
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.25);
+  display: none;
+  cursor: pointer; }
+  #overlay #dialog {
+    cursor: default;
+    border: 2px solid black;
+    background: white;
+    padding: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    max-height: 700px;
+    margin-top: -350px;
+    margin-left: -300px;
+    overflow-y: auto; }
+    #overlay #dialog textarea {
+      width: 450px;
+      height: 40px; }
+    #overlay #dialog section > h2 {
+      border-bottom: 0.1em solid black; }
+    #overlay #dialog [data-dialog-action] {
+      display: none; }
+    #overlay #dialog [data-dialog-action=unauthorized] {
+      text-align: center;
+      padding: 0.5em;
+      margin: 0 0.5em 1em 0.5em;
+      color: orangered; }
+    #overlay #dialog [data-dialog-action=session-start] div {
+      padding: 3em;
+      text-align: center;
+      font-size: 2em; }
+    #overlay #dialog .requirements {
+      width: 290px;
+      margin-top: -3em;
+      float: right;
+      display: inline-block;
+      font-size: 0.9em; }
+      #overlay #dialog .requirements h4 {
+        display: inline-block;
+        color: black;
+        margin-left: -0.2em; }
+      #overlay #dialog .requirements#register-password-confirmation-requirements {
+        margin-top: 0; }
+      #overlay #dialog .requirements [data-validated=true] {
+        color: #32dc32; }
+        #overlay #dialog .requirements [data-validated=true]:before {
+          content: '☑ '; }
+      #overlay #dialog .requirements [data-validated=false] {
+        color: black; }
+        #overlay #dialog .requirements [data-validated=false]:before {
+          font-weight: normal;
+          content: '☐ '; }
+    #overlay #dialog .links {
+      margin-top: 1em;
+      padding: 0.5em;
+      border-top: 0.1em solid #ccc; }
+
+#login-dialog {
+  height: 400px; }

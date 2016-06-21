@@ -1,0 +1,36 @@
+{
+    "env": {
+        "browser": true
+    },
+    "extends": ["eslint:recommended", "plugin:jasmine/recommended"],
+    "rules": {
+        "indent": [
+            "error",
+            2
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    },
+    "plugins": [
+      "html",
+      "jasmine"
+    ],
+    "globals": {
+      "require": false,
+      "describe": false,
+      "it": false,
+      "google": true,
+      "EventPlannerEvent": true,
+      "EventPlanner": true
+    }
+}
