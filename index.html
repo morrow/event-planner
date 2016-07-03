@@ -7,6 +7,7 @@
     <link rel='stylesheet' href='css/eventPlannerEvent.css' />
     <link rel='stylesheet' href='fonts/opensans/regular/stylesheet.css' />
     <link rel='icon' href='favicon.ico' type='image/x-icon' />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body>
   <header>
@@ -40,7 +41,7 @@
         <form id='login-form' method='POST'>
           <label for='login-email' class='required'>
             <span>E-mail:</span>
-            <input id='login-email' name='login-form[email]' type='email' placeholder='email@example.com' autocomplete='email' required/>
+            <input id='login-email' name='login-form[email]' type='email' placeholder='email@example.com' autocomplete='section-login email' required/>
           </label>
           <label for='login-password' class='required'>
             <span>Password:</span>
@@ -61,7 +62,7 @@
         <form id='register-form' method='POST'>
           <label for='register-email' class='required'>
             <span>E-mail:</span>
-            <input id='register-email' name='register-form[email]' type='email' placeholder='email@example.com' autocomplete='email' required/>
+            <input id='register-email' name='register-form[email]' type='email' placeholder='email@example.com' autocomplete='section-register email' required/>
           </label>
           <label for='register-password' class='required'>
             <span>Password:</span>
@@ -73,7 +74,15 @@
           </label>
           <label for='register-name' class='required'>
             <span>Name:</span>
-            <input id='register-name' name='register-form[name]' type='text' placeholder='Your Name' autocomplete='name' required/>
+            <input id='register-name' name='register-form[name]' type='text' placeholder='Your Name' autocomplete='section-register name' required/>
+          </label>
+          <label for='register-employer'>
+            <span>Employer:</span>
+            <input id='register-employer' name='register-form[employer]' type='text' placeholder='Acme Inc.' autocomplete='section-register organization'/>
+          </label>
+          <label for='register-biography'>
+            <span>Biography:</span>
+            <textarea id='register-biography' name='register-form[biography]' placeholder='Your Biography'></textarea>
           </label>
           <input type='submit' value='Register' />
         </form>
@@ -90,35 +99,27 @@
         <form id='edit-user-form' method='POST'>
           <label for='edit-user-email' class='required'>
             <span>E-mail:</span>
-            <input id='edit-user-email' name='edit-user-form[email]' type='email' placeholder='email@example.com' autocomplete='email' required/>
+            <input id='edit-user-email' name='edit-user-form[email]' type='email' placeholder='email@example.com' autocomplete='section-edit-user email' disabled required/>
           </label>
+          <label for='edit-user-name' class='required'>
+            <span>Name:</span>
+            <input id='edit-user-name' name='edit-user-form[name]' type='text' placeholder='Your Name' autocomplete='section-edit-user name' required/>
+          </label>
+          <label for='edit-user-employer'>
+            <span>Employer:</span>
+            <input id='edit-user-employer' name='edit-user-form[employer]' type='text' placeholder='Acme Inc.' autocomplete='section-edit-user organization'/>
+          </label>
+          <label for='edit-user-biography'>
+            <span>Biography:</span>
+            <textarea id='edit-user-biography' name='edit-user-form[biography]' placeholder='Your Biography'></textarea>
+          </label>
+          <aside>Enter Password to save changes:</aside>
           <label for='edit-user-password' class='required'>
             <span>Password:</span>
             <input id='edit-user-password' name='edit-user-form[password]' type='password' placeholder='**********' required/>
           </label>
-          <label for='edit-user-password-confirmation' class='required'>
-            <span>Password Confirmation:</span>
-            <input id='edit-user-password-confirmation' name='edit-user-form[password]' type='password' placeholder='**********' required/>
-          </label>
-          <label for='edit-user-name' class='required'>
-            <span>Name:</span>
-            <input id='edit-user-name' name='edit-user-form[name]' type='text' placeholder='Your Name' autocomplete='name' required/>
-          </label>
           <input type='submit' value='Update User' />
         </form>
-        <div class='links'>
-          <label for='show-registration-dialog'>
-            Already have an account?
-            <button id='show-login-dialog'>Login</button>
-          </label>
-        </div>
-      </section>
-      <!-- sessions dialog -->
-      <section id='session-start-dialog' data-dialog-action='session-start'>
-        <div>Logged in Successfully!</div>
-      </section>
-      <section id='session-end-dialog' data-dialog-action='session-end'>
-        <div>Logged out Successfully!</div>
       </section>
       <!-- create event dialog -->
       <section id='create-edit-event-dialog' data-dialog-action='create-edit-event'>
@@ -141,11 +142,11 @@
           </label>
           <label for='create-edit-event-host' class='required'>
             <span>Event Host:</span>
-            <input id='create-edit-event-host' name='create-edit-event-form[host]' type='text' placeholder='Event Host' required/>
+            <input id='create-edit-event-host' name='create-edit-event-form[host]' type='text' placeholder='Event Host' autocomplete='section-create-event organiztaion' required/>
           </label>
           <label for='create-edit-event-location' class='required'>
             <span>Location:</span>
-            <input id='create-edit-event-location' name='create-edit-event-form[location]' type='text' placeholder='location' autocomplete='street-address' required/>
+            <input id='create-edit-event-location' name='create-edit-event-form[location]' type='text' placeholder='location' autocomplete='section-create-event street-address' required/>
           </label>
           <label for='create-edit-event-start' class='required'>
             <span>Event Start:</span>
@@ -171,6 +172,9 @@
           <input type='submit' value='Update Event' data-dialog-action='edit-event' />
           <button id='create-edit-event-delete' data-dialog-action='edit-event'>Delete Event</button>
         </form>
+      </section>
+      <section id='message-dialog' data-dialog-action='message'>
+        <h3 id='message-dialog-message'></h3>
       </section>
       <section id='error-dialog' data-dialog-action='error'>
         <div id='error'></div>

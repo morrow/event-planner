@@ -46,18 +46,35 @@ header, main, footer {
   display: block; }
 
 header {
-  height: 3em;
+  display: block;
+  min-height: 3em;
   padding: 1.5em 1em;
   background: #0cf;
-  border-bottom: 0.1em solid #666; }
+  border-bottom: 0.1em solid #666;
+  min-width: 250px; }
   header h1 {
     letter-spacing: 2px;
     color: white; }
+    @media (max-width: 830px) {
+      header h1 {
+        text-align: center; } }
+    @media (min-width: 830px) {
+      header h1 {
+        padding-left: 0.5em; } }
   header #actions {
     text-align: right;
-    margin-top: -2em; }
+    margin-top: -2.5em; }
+    @media (max-width: 830px) {
+      header #actions {
+        margin-top: 1em;
+        text-align: center; } }
     header #actions #user, header #actions #search {
       display: inline-block; }
+      @media (max-width: 580px) {
+        header #actions #user, header #actions #search {
+          margin-right: 0 !important;
+          text-align: center;
+          display: block; } }
     header #actions #search {
       margin-right: 2em;
       margin-bottom: 1em; }
@@ -131,18 +148,45 @@ form#create-edit-event-form label {
     cursor: default;
     border: 2px solid black;
     background: white;
-    padding: 1em;
+    padding: 10px;
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 600px;
-    max-height: 700px;
-    margin-top: -350px;
-    margin-left: -300px;
     overflow-y: auto; }
+    @media only screen and (max-width: 800px) {
+      #overlay #dialog {
+        width: 300px;
+        margin-left: -160px; } }
+    @media only screen and (min-width: 800px) {
+      #overlay #dialog {
+        width: 600px;
+        margin-left: -310px; } }
+    @media only screen and (min-height: 800px) {
+      #overlay #dialog {
+        max-height: 700px;
+        margin-top: -360px; } }
+    @media only screen and (min-height: 900px) {
+      #overlay #dialog {
+        max-height: 800px;
+        margin-top: -410px; } }
+    @media only screen and (max-height: 800px) {
+      #overlay #dialog {
+        height: 650px;
+        margin-top: -360px; } }
+    @media only screen and (max-height: 700px) {
+      #overlay #dialog {
+        height: 500px;
+        margin-top: -260px; } }
+    @media only screen and (max-height: 600px) {
+      #overlay #dialog {
+        height: 400px;
+        margin-top: -210px; } }
     #overlay #dialog textarea {
-      width: 450px;
-      height: 40px; }
+      min-width: 230px;
+      max-width: 450px;
+      height: 40px;
+      border-radius: 3px;
+      border: 1px solid black; }
     #overlay #dialog section > h2 {
       border-bottom: 0.1em solid black; }
     #overlay #dialog [data-dialog-action] {
@@ -152,16 +196,23 @@ form#create-edit-event-form label {
       padding: 0.5em;
       margin: 0 0.5em 1em 0.5em;
       color: orangered; }
-    #overlay #dialog [data-dialog-action=session-start] div {
-      padding: 3em;
-      text-align: center;
-      font-size: 2em; }
+    #overlay #dialog [data-dialog-action=message] h3 {
+      padding: 3em 0;
+      text-align: center; }
     #overlay #dialog .requirements {
       width: 290px;
       margin-top: -3em;
       float: right;
       display: inline-block;
       font-size: 0.9em; }
+      @media only screen and (max-width: 800px) {
+        #overlay #dialog .requirements {
+          margin-top: 2em !important;
+          margin-left: 1em !important;
+          border-left: 1px dotted #333;
+          padding-left: 1em;
+          float: none !important;
+          display: block !important; } }
       #overlay #dialog .requirements h4 {
         display: inline-block;
         color: black;

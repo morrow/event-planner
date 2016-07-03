@@ -1,7 +1,7 @@
 #events {
   text-align: center; }
   #events h1 {
-    width: 600px;
+    max-width: 600px;
     margin: 0 auto;
     border-bottom: 1px solid #999; }
 
@@ -9,34 +9,42 @@
   margin: 2em auto;
   padding: 0;
   background: #fff;
-  width: 600px;
   border-radius: 3px;
   border: 1px solid black;
   padding-bottom: 0.25em;
   text-align: center;
-  box-shadow: 0px 0px 0.75em #bbb; }
+  box-shadow: 0px 0px 0.75em #bbb;
+  max-width: 600px; }
   .event > * {
     margin: 1em; }
-  .event h2 {
+  .event .title {
     margin: 0;
     margin-bottom: 0.25em;
     padding-bottom: 0.2em;
     padding: 0.5em;
     background: #333;
     color: white; }
+    .event .title h2 {
+      display: inline-block; }
   .event button {
-    float: right;
+    display: inline-block;
     font-size: 0.85em;
-    margin-top: -3.5em; }
+    margin-top: -2.25em; }
+    @media only screen and (max-width: 479px) {
+      .event button {
+        margin-top: 0 !important; } }
   .event.highlighted {
     border-color: yellow;
     box-shadow: 0px 0px 3px yellow; }
-    .event.highlighted ah2 {
+    .event.highlighted .title {
       background: yellow;
       color: black; }
   .event .type, .event .host, .event .location, .event .start, .event .end, .event .guestlist, .event .info {
     margin: 1em;
     font-size: 1.25em; }
+    @media only screen and (max-width: 479px) {
+      .event .type, .event .host, .event .location, .event .start, .event .end, .event .guestlist, .event .info {
+        font-size: 2em !important; } }
     .event .type div:first-child, .event .host div:first-child, .event .location div:first-child, .event .start div:first-child, .event .end div:first-child, .event .guestlist div:first-child, .event .info div:first-child {
       color: #999;
       font-weight: normal;

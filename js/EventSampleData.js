@@ -1,4 +1,4 @@
-if (window.localStorage['eventPlanner/Event'] === undefined) {
+if (true || window.localStorage['eventPlanner/Event'] === undefined) {
   window.localStorage['eventPlanner/Event'] = JSON.stringify([{
     name: 'Michael\'s Retirement Party',
     type: 'Office Party',
