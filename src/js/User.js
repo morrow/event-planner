@@ -1,6 +1,6 @@
 function User(data){
   var self = this;
-  this.attributes = ['name', 'email', 'password', 'bio'];
+  this.attributes = ['name', 'email', 'password', 'biography', 'employer'];
   this.attributes.forEach(function(attribute){
     self[attribute] = data[attribute];
   });

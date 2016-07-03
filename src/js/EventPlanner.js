@@ -46,7 +46,7 @@ EventPlanner.prototype.attachEventListeners = function(){
   document.querySelector('#search-input').addEventListener('input', function(e){
     self.filterEvents(e.target.value);
   });
-  // handle form form submit event
+  // handle form submit event
   [].forEach.call(document.querySelectorAll('form'), function(form){
     form.addEventListener('submit', function(e){
       try {
@@ -84,6 +84,17 @@ EventPlanner.prototype.attachEventListeners = function(){
       document.querySelector('#register')[listener] = function(){
         self.showDialog('register');
       };
+      // editUser
+      document.querySelector('#current_user')[listener] = function(){
+        console.log(self.current_user);
+        self.current_user.attributes.forEach(function(attribute){
+          if(!!document.querySelector('#edit-user-' + attribute) && self.current_user[attribute] !== undefined){
+            document.querySelector('#edit-user-' + attribute).value = self.current_user[attribute];
+          }
+          document.querySelector('#edit-user-password').value = '';
+        });
+        self.showDialog('edit-user');
+      };
     }
     // create event
     [].forEach.call(document.querySelectorAll('.new-event'), function(button){
@@ -111,7 +122,7 @@ EventPlanner.prototype.attachEventListeners = function(){
         });
         self.renderEvents();
         self.saveData();
-        self.closeDialog();
+        self.closeDialog('Event deleted');
         e.preventDefault();
         return false;
       };
@@ -242,7 +253,7 @@ EventPlanner.prototype.submitForm = function (form){
   var self = this;
   if(form.id === 'register-form'){
     var user_obj = {};
-    ['name', 'email', 'password'].forEach(function(attribute){
+    ['name', 'email', 'password', 'biography', 'employer'].forEach(function(attribute){
       user_obj[attribute] = form.querySelector('#register-' + attribute).value;
     });
     var user = new User(user_obj);
@@ -250,16 +261,14 @@ EventPlanner.prototype.submitForm = function (form){
     this.users.push(user);
     this.saveData();
     this.setCurrentUser(user);
-    this.showDialog('session-start');
-    window.setTimeout(function(){ self.closeDialog(); }, 750);
+    self.closeDialog('Registered successfully');
   }
   else if(form.id === 'login-form'){
     this.users.forEach(function(user){
       if(user.email == form.elements['login-email'].value){
         self.saveData();
         self.setCurrentUser(user);
-        self.showDialog('session-start');
-        window.setTimeout(function(){ self.closeDialog(); }, 750);
+        self.closeDialog('Logged in Successfully');
       }
     });
   }
@@ -270,8 +279,15 @@ EventPlanner.prototype.submitForm = function (form){
       _event[attribute] = form.elements['create-edit-event-' + attribute].value;
     });
     this.saveData();
-    this.closeDialog();
+    this.closeDialog('Event Updated Successfully');
     this.renderEvents();
+  }
+  else if(form.id === 'edit-user-form'){
+    ['name', 'employer', 'biography'].forEach(function(attribute){
+      self.current_user[attribute] = form.querySelector('#edit-user-' + attribute).value;
+    });
+    this.saveData();
+    self.closeDialog('User updated successfully');
   }
 };
 
@@ -333,11 +349,12 @@ EventPlanner.prototype.validatePasswords = function (form) {
 
 EventPlanner.prototype.validateLogin = function(form){
   var self = this;
-  var email_element = form.elements['login-email'];
-  var password_element = form.elements['login-password'];
+  var email_element = form.querySelector('[type=email]');
+  var password_element = form.querySelector('[type=password]');
   var passing = false;
   [].forEach.call(self.users, function(user){
     if(user.email === email_element.value && user.login(password_element.value)){
+      password_element.removeAttribute('data-validated');
       passing = true;
     }
   });
@@ -346,9 +363,11 @@ EventPlanner.prototype.validateLogin = function(form){
 };
 
 EventPlanner.prototype.validateEmail = function(element){
+  var self = this;
   var messages = ['E-mail', 'Must be valid e-mail address', 'Must not be already registered'];
   var tests = [
-    function(a){ return a.match(/^\S+@\S+$/); }
+    function(a){ return a.match(/^\S+@\S+$/) },
+    function(a){ var valid = true; self.users.forEach(function(user){ if(user.email == a) { valid = false; } }); return valid;}
   ];
   this.evaluateRequirements(element, tests, messages);
 };
@@ -363,8 +382,8 @@ EventPlanner.prototype.validateName = function(element){
 
 EventPlanner.prototype.validateForm = function(form){
   var validated = true;
-  if(form.id.match(/login/)){
-    return this.validateLogin(form);
+  if(form.id.match(/login|edit-user/)){
+    validated = this.validateLogin(form);
   }
   [].forEach.call(form.querySelectorAll('input'), function(input){
     if(input.getAttribute('data-validated') == 'false'){
@@ -429,7 +448,17 @@ EventPlanner.prototype.editEvent = function(_event, show_dialog){
   }
 };
 
-EventPlanner.prototype.closeDialog = function(){
+EventPlanner.prototype.closeDialog = function(message, timeout){
+  if(message){
+    var self = this;
+    if(timeout === undefined){
+      timeout = 750;
+    }
+    document.querySelector('#message-dialog-message').innerHTML = message;
+    self.showDialog('message');
+    return window.setTimeout( function(){ self.closeDialog(); }, timeout);
+  }
+  document.querySelector('#message-dialog-message').innerHTML = '';
   document.querySelector('body').className = document.querySelector('body').className.replace('overlay-active', '');
 };
 

@@ -1,6 +1,8 @@
 <div class='event' data-event-id='{{this.id}}'>
-  <h2 class='name'>{{this.name}}</h2>
-  <button onclick='window.eventPlanner.editEvent({{this.id}}, true)'>Edit Event</button>
+  <div class='title'>
+    <h2 class='name'>{{this.name}}</h2>
+    <button onclick='window.eventPlanner.editEvent({{this.id}}, true)'>Edit Event</button>
+  </div>
   <div class='type'>
     <div>Event Type:</div>
     {{this.type}}

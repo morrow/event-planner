@@ -1,7 +1,10 @@
+$smartphones: "only screen and (max-width: 479px)";
+$tablets: "only screen and (min-width: 768px) and (max-width: 959px)";
+
 #events {
   text-align:center;
   h1 {
-    width:600px;
+    max-width:600px;
     margin:0 auto;
     border-bottom:1px solid #999;
   }
@@ -11,32 +14,36 @@
   margin:2em auto;
   padding:0;
   background:#fff;
-  width:600px;
   border-radius:3px;
   border:1px solid black;
   padding-bottom:0.25em;
   text-align:center;
   box-shadow:0px 0px 0.75em #bbb;
+  max-width:600px;
    > * {
      margin:1em;
    }
-  h2 {
+  .title {
     margin: 0;
     margin-bottom:0.25em;
     padding-bottom:0.2em;
     padding:0.5em;
     background:#333;
     color:white;
+    h2 {
+      display:inline-block;
+    }
   }
   button {
-    float:right;
+    display:inline-block;
     font-size:0.85em;
-    margin-top:-3.5em;
+    margin-top:-2.25em;
+    @media #{$smartphones} { margin-top:0 !important; }
   }
   &.highlighted {
     border-color:yellow;
     box-shadow:0px 0px 3px yellow;
-    ah2 {
+    .title {
       background:yellow;
       color:black;
     }
@@ -44,6 +51,7 @@
   .type, .host, .location, .start, .end, .guestlist, .info {
     margin:1em;
     font-size:1.25em;
+    @media #{$smartphones} { font-size:2em !important; }
     div:first-child {
       color:#999;
       font-weight:normal;

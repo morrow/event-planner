@@ -1,3 +1,6 @@
+$smartphones: "only screen and (max-width: 479px)";
+$tablets: "only screen and (min-width: 768px) and (max-width: 959px)";
+
 * {
   margin:0;
   padding:0;
@@ -56,18 +59,35 @@ header, main, footer {
 }
 
 header {
-  height:3em;
+  display:block;
+  min-height:3em;
   padding:1.5em 1em;
   background:#0cf;
   border-bottom: 0.1em solid #666;
+  min-width:250px;
   h1 {
+    @media (max-width:830px) {
+      text-align:center;
+    }
+    @media (min-width:830px) {
+      padding-left:0.5em;
+    }
     letter-spacing:2px;
     color:white;
   }
   #actions {
     text-align:right;
-    margin-top:-2em;
+    margin-top:-2.5em;
+    @media (max-width:830px) {
+      margin-top:1em;
+      text-align:center;
+    }
     #user, #search {
+      @media (max-width:580px) {
+        margin-right:0 !important;
+        text-align:center;
+        display:block;
+      }
       display:inline-block;
     }
     #search {
@@ -170,18 +190,45 @@ form#create-edit-event-form {
     cursor:default;
     border:2px solid black;
     background:white;
-    padding:1em;
+    padding:10px;
     position:absolute;
     top:50%;
     left:50%;
-    width:600px;
-    max-height:700px;
-    margin-top:-350px;
-    margin-left:-300px;
+    @media only screen and (max-width: 800px) {
+      width:300px;
+      margin-left:-160px;
+    }
+    @media only screen and (min-width: 800px) {
+      width:600px;
+      margin-left:-310px;
+    }
+    @media only screen and (min-height: 800px) {
+      max-height:700px;
+      margin-top:-360px;
+    }
+    @media only screen and (min-height: 900px) {
+      max-height:800px;
+      margin-top:-410px;
+    }
+    @media only screen and (max-height: 800px) {
+      height:650px;
+      margin-top:-360px;
+    }
+    @media only screen and (max-height:700px) {
+      height:500px;
+      margin-top:-260px;
+    }
+    @media only screen and (max-height:600px) {
+      height:400px;
+      margin-top:-210px;
+    }
     overflow-y:auto;
     textarea {
-      width:450px;
+      min-width:230px;
+      max-width:450px;
       height:40px;
+      border-radius:3px;
+      border:1px solid black;
     }
     section > h2 {
       border-bottom:0.1em solid black;
@@ -195,16 +242,24 @@ form#create-edit-event-form {
       margin:0 0.5em 1em 0.5em;
       color:orangered;
     }
-    [data-dialog-action=session-start] {
-      div {
-        padding:3em;
+    [data-dialog-action=message] {
+      h3 {
+        padding:3em 0;
         text-align:center;
-        font-size:2em;
       }
     }
     .requirements {
       width:290px;
       margin-top:-3em;
+      @media only screen and (max-width: 800px) {
+        margin-top:2em !important;
+        margin-left:1em !important;
+        border-left: 1px dotted #333;
+        padding-left:1em;
+
+        float:none !important;
+        display:block !important;
+      }
       h4 {
         display:inline-block;
         color:black;
