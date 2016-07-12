@@ -97,6 +97,9 @@ form {
   form label {
     margin: 1em 0;
     display: block; }
+    @media only screen and (max-width: 479px) {
+      form label {
+        margin: 0.5em; } }
     form label span:after {
       content: ' (optional)';
       color: gray; }
@@ -227,7 +230,8 @@ form#create-edit-event-form label {
         color: black; }
         #overlay #dialog .requirements [data-validated=false]:before {
           font-weight: normal;
-          content: '☐ '; }
+          content: '☐ ';
+          color: black !important; }
     #overlay #dialog .links {
       margin-top: 1em;
       padding: 0.5em;
