@@ -38,7 +38,7 @@ $tablets: "only screen and (min-width: 768px) and (max-width: 959px)";
     display:inline-block;
     font-size:0.85em;
     margin-top:-2.25em;
-    @media #{$smartphones} { margin-top:0 !important; }
+    @media #{$smartphones} { margin-top:0.5em !important; }
   }
   &.highlighted {
     border-color:yellow;
@@ -51,7 +51,9 @@ $tablets: "only screen and (min-width: 768px) and (max-width: 959px)";
   .type, .host, .location, .start, .end, .guestlist, .info {
     margin:1em;
     font-size:1.25em;
-    @media #{$smartphones} { font-size:2em !important; }
+    @media #{$smartphones} {
+      font-size:1.25em !important;
+    }
     div:first-child {
       color:#999;
       font-weight:normal;
