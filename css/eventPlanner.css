@@ -185,11 +185,14 @@ form#create-edit-event-form label {
         height: 400px;
         margin-top: -210px; } }
     #overlay #dialog textarea {
-      min-width: 230px;
-      max-width: 450px;
-      height: 40px;
+      width: 450px;
+      height: 50px;
       border-radius: 3px;
       border: 1px solid black; }
+      @media only screen and (max-width: 800px) {
+        #overlay #dialog textarea {
+          width: 230px !important;
+          height: 40px !important; } }
     #overlay #dialog section > h2 {
       border-bottom: 0.1em solid black; }
     #overlay #dialog [data-dialog-action] {
