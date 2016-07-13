@@ -1,34 +1,31 @@
 describe('Event Planner', function(){
   var testEventData = {
     name: 'Test Event',
-    type: 'Test',
-    host: 'Dunder Mifflin',
+    type: 'Test Type',
+    host: 'Test Host',
     start: "2016-06-01T20:00:00",
     end: "2016-06-01T22:00:00",
-    guestlist: 'Michael Scott, Dwight Schrute, Jim Halpert, Pam Beesly, Ryan Howard, Andy Bernard, Angela Martin, Kelly Kapoor, Oscar Martinez',
+    guestlist: 'Guest 1, Guest 2, Guest 3',
     capacity: 30,
-    location: 'Dunder Mifflin Paper Company, Scranton, PA',
-    description: 'The best retirement party ever'
+    location: 'New York, NY',
+    description: 'Test Description'
   };
   var testEventData2 = {
     name: 'Test Event 2',
-    type: 'Office Party',
-    host: 'Dunder Mifflin',
-    start: "2016-06-01T20:00:00",
-    end: "2016-06-01T22:00:00",
-    guestlist: 'Michael Scott, Dwight Schrute, Jim Halpert, Pam Beesly, Ryan Howard, Andy Bernard, Angela Martin, Kelly Kapoor, Oscar Martinez',
-    capacity: 30,
-    location: 'Dunder Mifflin Paper Company, Scranton, PA',
-    description: 'The best retirement party ever'
+    type: 'Test Type',
+    host: 'Test Host',
+    start: "2016-11-01T20:00:00",
+    end: "2016-11-01T22:00:00",
+    guestlist: 'Guest 1, Guest 2, Guest 3',
+    capacity: 10,
+    location: 'New York, NY',
+    description: 'Test Description'
   };
   var testUserData = {
     name:                  'Test User',
     email:                 'testuser@example.com',
     password:              'changeme',
     password_confirmation: 'changeme',
-    bio: {
-      employer: 'google'
-    }
   };
 
   describe('Required Features for Completion', function(){
@@ -46,14 +43,22 @@ describe('Event Planner', function(){
         expect(eventPlanner.getUser(0)).toBe(testUser);
       });
 
-      it('should have name, email, password, and bio attributes', function(){
+      it('should have required name, email, and password attributes', function(){
         eventPlanner.createUser(testUser);
-        ['name', 'email', 'password', 'bio'].forEach(function(attribute){
+        ['name', 'email', 'password'].forEach(function(attribute){
           expect(eventPlanner.getUser(0)[attribute]).toBeDefined();
           expect(eventPlanner.getUser(0)[attribute]).toBe(testUser[attribute]);
         });
       });
 
+      it('should allow creation of optional employer and biography attributes', function(){
+        eventPlanner.createUser(testUser);
+        ['employer', 'biography'].forEach(function(attribute){
+          eventPlanner.getUser(0)[attribute] = 'test' + attribute;
+        });
+        expect(eventPlanner.getUser(0).employer).toBeDefined();
+        expect(eventPlanner.getUser(0).biography).toBeDefined();
+      });
     });
 
     describe('Event Planner Event', function(){
@@ -62,7 +67,7 @@ describe('Event Planner', function(){
       beforeEach(function(){
         testUser = new User(testUserData);
         eventPlanner = new EventPlanner();
-        testEvent = new EventPlannerEvent(eventPlanner, testEventData);
+        testEvent = new EventPlannerEvent(testEventData);
       });
 
       it('should let a user create an event', function(){
@@ -70,7 +75,7 @@ describe('Event Planner', function(){
         expect(eventPlanner.getEvent(0)).toBe(testEvent);
       });
 
-      it('should have name, type, host, start, end, guest_list, location attributes', function(){
+      it('should have name, type, host, start, end, guestlist, location attributes', function(){
         eventPlanner.createEvent(testEvent);
         ['name', 'type', 'host', 'start', 'end', 'guestlist', 'location'].forEach(function(attribute){
           expect(eventPlanner.getEvent(0)[attribute]).toBeDefined();
@@ -86,8 +91,8 @@ describe('Event Planner', function(){
       beforeEach(function(){
         testUser = new User(testUserData);
         eventPlanner = new EventPlanner();
-        testEvent = new EventPlannerEvent(eventPlanner, testEventData);
-        testEvent2 = new EventPlannerEvent(eventPlanner, testEventData2);
+        testEvent = new EventPlannerEvent(testEventData);
+        testEvent2 = new EventPlannerEvent(testEventData2);
       });
 
       it('should display events that have been created', function(done){
