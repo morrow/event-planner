@@ -86,7 +86,6 @@ EventPlanner.prototype.attachEventListeners = function(){
       };
       // editUser
       document.querySelector('#current_user')[listener] = function(){
-        console.log(self.current_user);
         self.current_user.attributes.forEach(function(attribute){
           if(!!document.querySelector('#edit-user-' + attribute) && self.current_user[attribute] !== undefined){
             document.querySelector('#edit-user-' + attribute).value = self.current_user[attribute];
