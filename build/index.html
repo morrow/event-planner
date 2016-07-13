@@ -41,7 +41,7 @@
         <form id='login-form' method='POST'>
           <label for='login-email' class='required'>
             <span>E-mail:</span>
-            <input id='login-email' name='login-form[email]' type='email' placeholder='email@example.com' autocomplete='section-login email' required/>
+            <input id='login-email' name='login-form[email]' type='email' placeholder='email@example.com' autocomplete='section-login email' required autofocus/>
           </label>
           <label for='login-password' class='required'>
             <span>Password:</span>
@@ -62,7 +62,7 @@
         <form id='register-form' method='POST'>
           <label for='register-email' class='required'>
             <span>E-mail:</span>
-            <input id='register-email' name='register-form[email]' type='email' placeholder='email@example.com' autocomplete='section-register email' required/>
+            <input id='register-email' name='register-form[email]' type='email' placeholder='email@example.com' autocomplete='section-register email' required autofocus/>
           </label>
           <label for='register-password' class='required'>
             <span>Password:</span>
@@ -103,7 +103,7 @@
           </label>
           <label for='edit-user-name' class='required'>
             <span>Name:</span>
-            <input id='edit-user-name' name='edit-user-form[name]' type='text' placeholder='Your Name' autocomplete='section-edit-user name' required/>
+            <input id='edit-user-name' name='edit-user-form[name]' type='text' placeholder='Your Name' autocomplete='section-edit-user name' required autofocus/>
           </label>
           <label for='edit-user-employer'>
             <span>Employer:</span>
@@ -129,7 +129,7 @@
           <input id='create-edit-event-id' type='hidden' />
           <label for='create-edit-event-name' class='required'>
             <span>Event Name:</span>
-            <input id='create-edit-event-name' name='create-edit-event-form[name]' type='text' placeholder='Event Name' required/>
+            <input id='create-edit-event-name' name='create-edit-event-form[name]' type='text' placeholder='Event Name' required autofocus/>
           </label>
           <label for='create-edit-event-type' class='required'>
             <span>Event Type:</span>

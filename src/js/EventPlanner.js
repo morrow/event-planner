@@ -480,12 +480,16 @@ EventPlanner.prototype.showDialog = function(action){
     // grab elements associated with the action input
     elements = document.querySelectorAll('#dialog [data-dialog-action=' + action + ']');
   }
+  // show overlay
+  document.querySelector('body').className = 'overlay-active';
   // display elements
   [].forEach.call(elements, function(element){
     element.style.display = 'block';
+    var autofocus_element = element.querySelector('[autofocus]');
+    if(autofocus_element){
+      autofocus_element.focus();
+    }
   });
-  // show overlay
-  document.querySelector('body').className = 'overlay-active';
 };
 
 EventPlanner.prototype.showEditDialog = function(){
