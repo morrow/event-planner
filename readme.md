@@ -1,7 +1,7 @@
 # Event Planner #
 [Udacity Senior Web Developer Nanodegree](https://www.udacity.com/course/senior-web-developer-nanodegree--nd802) Project #1: Meet-Up Event Planner
-The goal of this project is to demonstrate proficiency in web forms.
-This application uses Bower, SASS, Gulp, Jasmine,
+The goal of this project is to demonstrate proficiency in web forms by reconstructing an event planner similar to meetup.com. I chose to build a simple front-end application that uses localStorage to persist event and user data.
+Libraries and Tools used include: Bower, SASS, Gulp, Jasmine, gulp-sass, gulp-eslint, and gulp-notify.
 
 ## To Run Application ##
 1) Clone this Repository
