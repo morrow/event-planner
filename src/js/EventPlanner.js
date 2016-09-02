@@ -66,13 +66,6 @@ EventPlanner.prototype.attachEventListeners = function(){
   // validate form elements on input
   [].forEach.call(document.querySelectorAll('form input, form textarea'), function(element){
     element.addEventListener('input', function(){
-      // set constraints for start and end datetimes, so that the user cannot put an end datetime at or earlier to the event start time
-      if(element.id == 'create-edit-event-start'){
-        document.querySelector('#create-edit-event-end').min = (new Date((new Date(element.value)).getTime() + 60 * 1000)).toISOString().split('.')[0];
-      }
-      if(element.id == 'create-edit-event-end'){
-        element.min = (new Date((new Date(document.querySelector('#create-edit-event-start').value)).getTime() + 60 * 1000)).toISOString().split('.')[0];
-      }
       self.validateElement(element);
     });
   });
@@ -393,11 +386,15 @@ EventPlanner.prototype.validateName = function(element){
 };
 
 EventPlanner.prototype.validateStartDate = function(element){
+  // set minimum value to end date at 1 minute later than start date value
+  document.querySelector('#create-edit-event-end').min = (new Date((new Date(element.value)).getTime() + 60 * 1000)).toISOString().split('.')[0];
   return document.querySelector('#create-edit-event-end').value > element.value;
 };
 
 EventPlanner.prototype.validateEndDate = function(element){
-return document.querySelector('#create-edit-event-start').value < element.value;
+  // set minimum value to end date at 1 minute later than start date value
+  element.min = (new Date((new Date(document.querySelector('#create-edit-event-start').value)).getTime() + 60 * 1000)).toISOString().split('.')[0];
+  return document.querySelector('#create-edit-event-start').value < element.value;
 };
 
 
