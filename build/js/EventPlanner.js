@@ -66,6 +66,13 @@ EventPlanner.prototype.attachEventListeners = function(){
   // validate form elements on input
   [].forEach.call(document.querySelectorAll('form input, form textarea'), function(element){
     element.addEventListener('input', function(){
+      // set constraints for start and end datetimes, so that the user cannot put an end datetime at or earlier to the event start time
+      if(element.id == 'create-edit-event-start'){
+        document.querySelector('#create-edit-event-end').min = (new Date((new Date(element.value)).getTime() + 60 * 1000)).toISOString().split('.')[0];
+      }
+      if(element.id == 'create-edit-event-end'){
+        element.min = (new Date((new Date(document.querySelector('#create-edit-event-start').value)).getTime() + 60 * 1000)).toISOString().split('.')[0];
+      }
       self.validateElement(element);
     });
   });
@@ -321,6 +328,12 @@ EventPlanner.prototype.validateElement = function(element){
       return this.validateName(element);
     }
   }
+  if(element.id == 'create-edit-event-start'){
+    return this.validateStartDate(element);
+  }
+  if(element.id == 'create-edit-event-end'){
+    return this.validateEndDate(element);
+  }
 };
 
 EventPlanner.prototype.validatePasswords = function (form) {
@@ -378,6 +391,15 @@ EventPlanner.prototype.validateName = function(element){
   ];
   this.evaluateRequirements(element, tests, messages);
 };
+
+EventPlanner.prototype.validateStartDate = function(element){
+  return document.querySelector('#create-edit-event-end').value > element.value;
+};
+
+EventPlanner.prototype.validateEndDate = function(element){
+return document.querySelector('#create-edit-event-start').value < element.value;
+};
+
 
 EventPlanner.prototype.validateForm = function(form){
   var validated = true;
