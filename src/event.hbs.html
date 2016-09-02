@@ -1,0 +1,33 @@
+<div class='event' data-event-id='{{this.id}}'>
+  <div class='title'>
+    <h2 class='name'>{{this.name}}</h2>
+    <button onclick='window.eventPlanner.editEvent({{this.id}}, true)'>Edit Event</button>
+  </div>
+  <div class='type'>
+    <div>Event Type:</div>
+    {{this.type}}
+  </div>
+  <div class='host'>
+    <div>Hosted By:</div>
+    {{this.host}}
+  </div>
+  <div class='start'>
+    <div>Starting:</div>
+    <div class='start-date'>{{this.getStartDate()}}</div>
+    <div class='start-time'>{{this.getStartTime()}}</div>
+  </div>
+  <div class='end'>
+    <div>Ending:</div>
+    <div class='end-date'>{{this.getEndDate()}}</div>
+    <div class='end-time'>{{this.getEndTime()}}</div>
+  </div>
+  <div class='location'>
+    <div>Location:</div>
+    <a href='https://www.google.com/maps/search/{{this.location.replace(/ /g, "+")}}' target='_blank'>{{this.location}}</a>
+  </div>
+  <div class='guestlist'>
+    <div>Guests (maximum capacity {{this.capacity}}):</div>
+    {{this.guestlist}}
+  </div>
+  <div class='info'>{{if(this.info){ '<div>Additional Information:</div>' + this.info };}}</div>
+</div>

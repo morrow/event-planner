@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>Event Planner</title>
+    <meta charset='utf-8' />
+    <link rel='stylesheet' href='css/eventPlanner.css' />
+    <link rel='stylesheet' href='css/eventPlannerEvent.css' />
+    <link rel='stylesheet' href='fonts/opensans/regular/stylesheet.css' />
+    <link rel='icon' href='favicon.ico' type='image/x-icon' />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+  <header>
+    <h1>Event Planner</h1>
+    <div id='actions'>
+      <div id='search'>
+        <input id='search-input' type='search' placeholder='search' />
+      </div>
+      <div id='user'>
+        <button id='login' data-dialog-action='login'>login</button>
+        <button id='register' data-dialog-action='register'>register</button>
+        <button id='current_user'>user</button>
+        <button id='logout'>logout</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section id='events'>
+      <h1>Events</h1>
+      <ul id='events-list'></ul>
+    </section>
+    <br />
+    <button class='new-event'>+ Create New Event</button>
+  </main>
+  <div id='overlay'>
+    <div id='dialog'>
+      <!-- login dialog -->
+      <aside data-dialog-action='unauthorized'>Please login or register to continue</aside>
+      <section id='login-dialog' data-dialog-action='login'>
+        <h2>Login</h2>
+        <form id='login-form' method='POST'>
+          <label for='login-email' class='required'>
+            <span>E-mail:</span>
+            <input id='login-email' name='login-form[email]' type='email' placeholder='email@example.com' autocomplete='section-login email' required autofocus/>
+          </label>
+          <label for='login-password' class='required'>
+            <span>Password:</span>
+            <input id='login-password' name='login-form[password]' type='password' placeholder='••••••••' required/>
+          </label>
+          <input type='submit' value='Login' />
+        </form>
+      <div class='links'>
+        <label for='show-registration-dialog'>
+          Need an Account?</span>
+          <button id='show-registration-dialog'>Register</button>
+        </label>
+      </div>
+      </section>
+      <!-- register dialog -->
+      <section id='register-dialog' data-dialog-action='register'>
+        <h2>Register</h2>
+        <form id='register-form' method='POST'>
+          <label for='register-email' class='required'>
+            <span>E-mail:</span>
+            <input id='register-email' name='register-form[email]' type='email' placeholder='email@example.com' autocomplete='section-register email' required autofocus/>
+          </label>
+          <label for='register-password' class='required'>
+            <span>Password:</span>
+            <input id='register-password' name='register-form[password]' type='password' placeholder='••••••••' required/>
+          </label>
+          <label for='register-password-confirmation' class='required'>
+            <span>Password Confirmation:</span>
+            <input id='register-password-confirmation' name='login-form[password]' type='password' placeholder='••••••••' required/>
+          </label>
+          <label for='register-name' class='required'>
+            <span>Name:</span>
+            <input id='register-name' name='register-form[name]' type='text' placeholder='Your Name' autocomplete='section-register name' required/>
+          </label>
+          <label for='register-employer'>
+            <span>Employer:</span>
+            <input id='register-employer' name='register-form[employer]' type='text' placeholder='Acme Inc.' autocomplete='section-register organization'/>
+          </label>
+          <label for='register-biography'>
+            <span>Biography:</span>
+            <textarea id='register-biography' name='register-form[biography]' placeholder='Your Biography'></textarea>
+          </label>
+          <input type='submit' value='Register' />
+        </form>
+        <div class='links'>
+          <label for='show-registration-dialog'>
+            Already have an account?
+            <button id='show-login-dialog'>Login</button>
+          </label>
+        </div>
+      </section>
+      <!-- edit-user dialog -->
+      <section id='edit-user-dialog' data-dialog-action='edit-user'>
+        <h2>Edit User</h2>
+        <form id='edit-user-form' method='POST'>
+          <label for='edit-user-email' class='required'>
+            <span>E-mail:</span>
+            <input id='edit-user-email' name='edit-user-form[email]' type='email' placeholder='email@example.com' autocomplete='section-edit-user email' disabled required/>
+          </label>
+          <label for='edit-user-name' class='required'>
+            <span>Name:</span>
+            <input id='edit-user-name' name='edit-user-form[name]' type='text' placeholder='Your Name' autocomplete='section-edit-user name' required autofocus/>
+          </label>
+          <label for='edit-user-employer'>
+            <span>Employer:</span>
+            <input id='edit-user-employer' name='edit-user-form[employer]' type='text' placeholder='Acme Inc.' autocomplete='section-edit-user organization'/>
+          </label>
+          <label for='edit-user-biography'>
+            <span>Biography:</span>
+            <textarea id='edit-user-biography' name='edit-user-form[biography]' placeholder='Your Biography'></textarea>
+          </label>
+          <aside>Enter Password to save changes:</aside>
+          <label for='edit-user-password' class='required'>
+            <span>Password:</span>
+            <input id='edit-user-password' name='edit-user-form[password]' type='password' placeholder='••••••••' required/>
+          </label>
+          <input type='submit' value='Update User' />
+        </form>
+      </section>
+      <!-- create event dialog -->
+      <section id='create-edit-event-dialog' data-dialog-action='create-edit-event'>
+        <h2 data-dialog-action='create-event'>Create Event</h2>
+        <h2 data-dialog-action='edit-event'>Edit Event</h2>
+        <form id='create-edit-event-form'>
+          <input id='create-edit-event-id' type='hidden' />
+          <label for='create-edit-event-name' class='required'>
+            <span>Event Name:</span>
+            <input id='create-edit-event-name' name='create-edit-event-form[name]' type='text' placeholder='Event Name' required autofocus/>
+          </label>
+          <label for='create-edit-event-type' class='required'>
+            <span>Event Type:</span>
+            <input id='create-edit-event-type' name='create-edit-event-form[type]' list='event-type-list' placeholder='Event Type' required/>
+            <datalist id='event-type-list'>
+              <option value='party'>Party</option>
+              <option value='meeting'>Meeting</option>
+              <option value='ceremony'>Ceremony</option>
+            </datalist>
+          </label>
+          <label for='create-edit-event-host' class='required'>
+            <span>Event Host:</span>
+            <input id='create-edit-event-host' name='create-edit-event-form[host]' type='text' placeholder='Event Host' autocomplete='section-create-event organiztaion' required/>
+          </label>
+          <label for='create-edit-event-location' class='required'>
+            <span>Location:</span>
+            <input id='create-edit-event-location' name='create-edit-event-form[location]' type='text' placeholder='location' autocomplete='section-create-event street-address' required/>
+          </label>
+          <label for='create-edit-event-start' class='required'>
+            <span>Event Start:</span>
+            <input id='create-edit-event-start' name='create-edit-event-form[start]' type='datetime-local' required/>
+          </label>
+          <label for='create-edit-event-end' class='required'>
+            <span>Event End:</span>
+            <input id='create-edit-event-end' name='create-edit-event-form[end]' type='datetime-local' required/>
+          </label>
+          <label for='create-edit-event-guestlist' class='required'>
+            <span>Guest List (seperated by comma):</span>
+            <textarea id='create-edit-event-guestlist' name='create-edit-event-form[guestlist]' placeholder='Guest 1, Guest 2, Guest 3...' required></textarea>
+          </label>
+          <label for='create-edit-event-capacity' class='required'>
+            <span>Capacity:</span>
+            <input id='create-edit-event-capacity' name='create-edit-event-form[capacity]' type='number' placeholder='Event Capacity' min='1' required/>
+          </label>
+          <label for='create-edit-event-info'>
+            <span>Additional Info:</span>
+            <textarea id='create-edit-event-info' name='create-edit-event-form[info]'></textarea>
+          </label>
+          <input type='submit' value='Create Event' data-dialog-action='create-event' />
+          <input type='submit' value='Update Event' data-dialog-action='edit-event' />
+          <button id='create-edit-event-delete' data-dialog-action='edit-event'>Delete Event</button>
+        </form>
+      </section>
+      <section id='message-dialog' data-dialog-action='message'>
+        <h3 id='message-dialog-message'></h3>
+      </section>
+      <section id='error-dialog' data-dialog-action='error'>
+        <div id='error'></div>
+        <button onclick='eventPlanner.closeDialog'>OK</button>
+      </section>
+    </div>
+  </div>
+  <script src="js/User.js"></script>
+  <script src="js/EventPlannerEvent.js"></script>
+  <script src="js/EventSampleData.js"></script>
+  <script src="js/EventPlanner.js"></script>
+  <script src='js/Keys.js'></script>
+  <script> window.eventPlanner = new EventPlanner(document.querySelector('#events-list')); </script>
+  <script id='google-maps' async defer></script>
+  <script> document.querySelector('script#google-maps').setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=' + window.GOOGLE_API_KEY + '&libraries=places&callback=window.eventPlanner.initializeAutocomplete'); </script>
+</body>
+</html>
