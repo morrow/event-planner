@@ -45,17 +45,17 @@ EventPlannerEvent.prototype.getIndefiniteArticle = function(noun){
 };
 
 EventPlannerEvent.prototype.getStartDate = function(){
-  return (new Date(this.start)).toLocaleDateString(navigator.language, {weekday: 'long', month:'long', day: 'numeric', year:'numeric'});
+  return (new Date(this.start)).toLocaleDateString(navigator.language, {weekday: 'long', month:'long', day: 'numeric', year:'numeric', timeZone: 'UTC'});
 };
 
 EventPlannerEvent.prototype.getStartTime = function(){
-  return (new Date(this.start)).toLocaleTimeString(navigator.language, {hour:'2-digit', minute: '2-digit'});
+  return (new Date(this.start)).toLocaleTimeString(navigator.language, {hour:'2-digit', minute: '2-digit', timeZone: 'UTC'});
 };
 
 EventPlannerEvent.prototype.getEndDate = function(){
-  return (new Date(this.start)).toLocaleDateString(navigator.language, {weekday: 'long', month:'long', day: 'numeric', year:'numeric'});
+  return (new Date(this.start)).toLocaleDateString(navigator.language, {weekday: 'long', month:'long', day: 'numeric', year:'numeric', timeZone: 'UTC'});
 };
 
 EventPlannerEvent.prototype.getEndTime = function(){
-  return (new Date(this.end)).toLocaleTimeString(navigator.language, {hour:'2-digit', minute: '2-digit'});
+  return (new Date(this.end)).toLocaleTimeString(navigator.language, {hour:'2-digit', minute: '2-digit', timeZone: 'UTC'});
 };
